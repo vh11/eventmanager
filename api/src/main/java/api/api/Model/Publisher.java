@@ -1,7 +1,6 @@
 package api.api.Model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "publishers")
