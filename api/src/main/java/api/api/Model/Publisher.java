@@ -1,6 +1,6 @@
 package api.api.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "publishers")
@@ -12,22 +12,6 @@ public class Publisher {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getPublisher_name() {
-        return publisher_name;
-    }
-
-    public void setPublisher_name(String publisher_name) {
-        this.publisher_name = publisher_name;
-    }
-
-    public String getPublisher_email() {
-        return publisher_email;
-    }
-
-    public void setPublisher_email(String publisher_email) {
-        this.publisher_email = publisher_email;
     }
 
     public String getPublisher_description() {
@@ -50,10 +34,9 @@ public class Publisher {
     public String toString() {
         return "Publisher{" +
                 "id=" + id +
-                ", publisher_name='" + publisher_name + '\'' +
-                ", publisher_email='" + publisher_email + '\'' +
                 ", publisher_description='" + publisher_description + '\'' +
                 ", publisher_icon='" + publisher_icon + '\'' +
+                ", user=" + user +
                 '}';
     }
 
@@ -61,15 +44,21 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "publisher_name")
-    private String publisher_name;
-
-    @Column(name = "publisher_email")
-    private String publisher_email;
-
-    @Column(name = "publisher_description",  columnDefinition="TEXT")
+    @Column(name = "publisher_description", nullable = false)
     private String publisher_description;
 
-    @Column(name = "publisher_icon",  columnDefinition="TEXT")
+    @Column(name = "publisher_icon")
     private String publisher_icon;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

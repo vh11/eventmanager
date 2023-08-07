@@ -1,13 +1,94 @@
 package api.api.Model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
 
 import java.sql.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public User() {
+    }
+
+    public User(String creation_date, String mail, String password) {
+        this.creation_date = Date.valueOf(creation_date);
+        this.email = mail;
+        this.password = password;
+    }
 
     public int getId() {
         return id;
@@ -33,14 +114,6 @@ public class User {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public Date getCreation_date() {
         return creation_date;
     }
@@ -55,7 +128,6 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password=" + password +
-                ", username='" + username + '\'' +
                 ", creation_date=" + creation_date +
                 '}';
     }
@@ -64,17 +136,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
-    @Column(name = "email")
+    @Column(nullable = false, length = 50, unique = true, name = "email")
     private String email;
 
-    @NotNull
-    @Column(name = "password", columnDefinition="TEXT")
+    @Column(nullable = false, length = 64, name = "password")
     private String password;
 
-    @NotNull
-    @Column(name = "username")
-    private String username;
 
     @Column(name = "creation_date")
     private Date creation_date;

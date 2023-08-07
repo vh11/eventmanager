@@ -1,4 +1,4 @@
-package Controllers;
+package api.api.Controllers;
 
 import api.api.excepton.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +36,8 @@ public class publisherController {
     public ResponseEntity<Publisher> updatePublisher(@PathVariable("id") Integer id, @RequestBody Publisher updatedPublisher) throws PublisherNotFoundException, PublisherNotFoundException {
         Publisher publisher = publisherService.get(id);
                 ;
-        publisher.setPublisher_email(updatedPublisher.getPublisher_email());
-        publisher.setPublisher_name(updatedPublisher.getPublisher_name());
+//        publisher.setPublisher_email(updatedPublisher.getPublisher_email());
+//        publisher.setPublisher_name(updatedPublisher.getPublisher_name());
         publisher.setPublisher_description(updatedPublisher.getPublisher_description());
         publisherService.update(id, publisher);
         return ResponseEntity.ok(publisher);

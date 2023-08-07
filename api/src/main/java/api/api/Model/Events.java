@@ -1,8 +1,8 @@
 package api.api.Model;
 
-import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -82,23 +82,23 @@ public class Events {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "event_name")
+    @Column(name = "event_name", nullable = false)
     private String event_name;
 
-    @Column(name = "event_description",  columnDefinition="TEXT")
+    @Column(name = "event_description",  nullable = false)
     private String event_description;
 
-    @Column(name = "event_category")
+    @Column(name = "event_category", nullable = false)
     private String event_category;
 
-    @Column(name = "date_from")
+    @Column(name = "date_from", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date_from;
 
-    @Column(name = "event_location")
+    @Column(name = "event_location", nullable = false)
     private String event_location;
 
     @ManyToOne
-    @JoinColumn(name = "publisher_id")
+    @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 }
