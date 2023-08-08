@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
 public class RoleRepositoryTests {
-    @Autowired private RoleRepository repo;
-    @Autowired private UserRepository userRepo;
+    @Autowired  RoleRepository repo;
+    @Autowired  UserRepository userRepo;
 
     @Test
     public void testCreateRoles() {

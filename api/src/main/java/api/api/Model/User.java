@@ -1,5 +1,6 @@
 package api.api.Model;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -143,6 +144,7 @@ public class User implements UserDetails {
     private String password;
 
 
+    @CreatedDate
     @Column(name = "creation_date")
     private Date creation_date;
 }

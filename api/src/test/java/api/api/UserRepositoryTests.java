@@ -16,14 +16,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Rollback(false)
 public class UserRepositoryTests {
 
-    @Autowired private UserRepository repo;
+   @Autowired private UserRepository repo;
 
     @Test
     public void testCreateUser() {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String password = passwordEncoder.encode("123456");
 
-        User newUser = new User("2023-08-06", "dan@yopmail.com", password);
+        User newUser = new User("2023-08-06", "test", password);
         User savedUser = repo.save(newUser);
 
         assertThat(savedUser).isNotNull();

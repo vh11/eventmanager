@@ -23,6 +23,7 @@ public class AuthApi {
 
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request) {
+
         try {
             Authentication authentication = authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
