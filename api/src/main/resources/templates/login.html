@@ -35,7 +35,7 @@
         })
             .then(response => {
                 if (response.ok) {
-                    return response.json();
+                    return "index";
                 } else {
                     throw new Error("Authentication failed");
                 }

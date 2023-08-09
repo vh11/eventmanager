@@ -30,8 +30,6 @@ public class ApiControllerRegisterPublisher {
     @PostMapping("/process_register_publisher")
     public String processRegistrationPublisher(User user)
     {
-
-        System.out.println("AICII NICI NU VREA SA MERGA");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);

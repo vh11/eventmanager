@@ -72,7 +72,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
-    private UserDetails getUserDetails(String token) {
+    public UserDetails getUserDetails(String token) {
         User userDetails = new User();
         Claims claims = jwtUtil.parseClaims(token);
         String subject = (String) claims.get(Claims.SUBJECT);
