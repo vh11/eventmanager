@@ -18,9 +18,12 @@
         }
     </style>
 </head>
+
+<p style="text-align: center">User Registration</p>
+
 <body>
 <div class="h-100 align-items-center justify-content-center m-5" >
-    <form class=" m-auto" th:action="@{/process_register}" method="post" th:object="${user}">
+    <form class=" m-auto" th:action="@{/process_register_user}" method="post" th:object="${user}">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" th:field="*{email}" class="form-control" id="exampleInputEmail1" placeholder="Enter email" minlength="5" required maxlength="45">
@@ -45,3 +48,6 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 </html>
+
+
+

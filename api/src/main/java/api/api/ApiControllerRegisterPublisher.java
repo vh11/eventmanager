@@ -1,4 +1,5 @@
 package api.api;
+import api.api.Model.Role;
 import api.api.Model.User;
 import api.api.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,27 +13,35 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 @Controller
-public class apiControllerRegister{
+public class ApiControllerRegisterPublisher {
 
     @Autowired
     UserRepository repo;
 
-    @GetMapping(value="/auth/register")
-    public String getRegisterPAge(Model model) {
+
+    @GetMapping(value="/auth/register/publisher")
+    public String getRegisterPagePublisher(Model model) {
         model.addAttribute("user", new User());
-        return "/auth/register";
+
+        return "/auth/register_publishers";
     }
 
-    @PostMapping("/process_register")
-    public String processRegistration(User user){
+
+    @PostMapping("/process_register_publisher")
+    public String processRegistrationPublisher(User user)
+    {
+
+        System.out.println("AICII NICI NU VREA SA MERGA");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         LocalDate localDate = LocalDate.now();
         user.setCreation_date(Date.valueOf(localDate));
+        user.addRole(new Role(2));
         repo.save(user);
 
         return "login";
+
     }
 
 }
